@@ -1,0 +1,144 @@
+{
+  "category" : {
+    "name" : "ROOT",
+    "board" : {
+      "id" : 0,
+      "posts" : [ ]
+    },
+    "children" : [ {
+      "category" : {
+        "name" : "남자",
+        "board" : {
+          "id" : 1,
+          "posts" : [ ]
+        },
+        "children" : [ {
+          "category" : {
+            "name" : "엑소",
+            "board" : {
+              "id" : 2,
+              "posts" : [ ]
+            },
+            "children" : [ {
+              "category" : {
+                "name" : "공지사항",
+                "board" : {
+                  "id" : 3,
+                  "posts" : [ ]
+                },
+                "children" : [ ]
+              }
+            }, {
+              "category" : {
+                "name" : "첸",
+                "board" : {
+                  "id" : 4,
+                  "posts" : [ ]
+                },
+                "children" : [ ]
+              }
+            }, {
+              "category" : {
+                "name" : "백현",
+                "board" : {
+                  "id" : 5,
+                  "posts" : [ ]
+                },
+                "children" : [ ]
+              }
+            } ]
+          }
+        }, {
+          "category" : {
+            "name" : "방탄소년단",
+            "board" : {
+              "id" : 6,
+              "posts" : [ ]
+            },
+            "children" : [ {
+              "category" : {
+                "name" : "공지사항",
+                "board" : {
+                  "id" : 7,
+                  "posts" : [ ]
+                },
+                "children" : [ ]
+              }
+            }, {
+              "category" : {
+                "name" : "익명게시판",
+                "board" : {
+                  "id" : 8,
+                  "posts" : [ {
+                    "id" : 1,
+                    "title" : "1번 게시글",
+                    "content" : "1번 게시글"
+                  } ]
+                },
+                "children" : [ ]
+              }
+            }, {
+              "category" : {
+                "name" : "뷔",
+                "board" : {
+                  "id" : 9,
+                  "posts" : [ ]
+                },
+                "children" : [ ]
+              }
+            } ]
+          }
+        } ]
+      }
+    }, {
+      "category" : {
+        "name" : "여자",
+        "board" : {
+          "id" : 10,
+          "posts" : [ ]
+        },
+        "children" : [ {
+          "category" : {
+            "name" : "블랙핑크",
+            "board" : {
+              "id" : 11,
+              "posts" : [ ]
+            },
+            "children" : [ {
+              "category" : {
+                "name" : "공지사항",
+                "board" : {
+                  "id" : 12,
+                  "posts" : [ ]
+                },
+                "children" : [ ]
+              }
+            }, {
+              "category" : {
+                "name" : "익명게시판",
+                "board" : {
+                  "id" : 8,
+                  "posts" : [ {
+                    "id" : 1,
+                    "title" : "1번 게시글",
+                    "content" : "1번 게시글"
+                  } ]
+                },
+                "children" : [ ]
+              }
+            }, {
+              "category" : {
+                "name" : "로제",
+                "board" : {
+                  "id" : 13,
+                  "posts" : [ ]
+                },
+                "children" : [ ]
+              }
+            } ]
+          }
+        } ]
+      }
+    } ]
+  }
+}

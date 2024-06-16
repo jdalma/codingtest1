@@ -1,12 +1,22 @@
 package org.example.question1.category;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.example.question1.Board;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Category implements Search<Category>, Serializable {
 
+    private static final ObjectMapper MAPPER = new ObjectMapper()
+            .registerModule(new SimpleModule().addSerializer(Category.class, new CategorySerializer()))
+            .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
     private final Category parent;
     private final String name;
     private final Board board;
@@ -24,35 +34,55 @@ public class Category implements Search<Category>, Serializable {
     }
 
     @Override
-    public Category searchById(int id) {
-        return searchById(this, id);
+    public List<Category> searchById(int id) {
+        return search((Category c) -> c.isSameId(id), new ArrayList<>());
     }
 
     @Override
     public List<Category> searchByName(String name) {
-        return null;
+        return search((Category c) -> c.isContainName(name), new ArrayList<>());
     }
 
     @Override
     public String convert() {
-        return null;
+        try {
+            return MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void addChild(Category child) {
         this.children.add(child);
     }
 
-    private Category searchById(Category category, int id) {
-        if (category.isBoardSameId(id)) {
-            return category;
-        } else {
-            this.children.stream()
-                    .filter(c -> c.searchById(c, id))
-                    .findFirst()
-        }
+    public String getName() {
+        return name;
     }
 
-    private boolean isBoardSameId(int id) {
+    public Board getBoard() {
+        return board;
+    }
+
+    public List<Category> getChildren() {
+        return children;
+    }
+
+    private List<Category> search(Predicate<Category> condition, List<Category> result) {
+        if (condition.test(this)) {
+            result.add(this);
+        }
+        for (Category child : this.children) {
+            child.search(condition, result);
+        }
+        return result;
+    }
+
+    private boolean isSameId(int id) {
         return this.board.isSameId(id);
+    }
+
+    private boolean isContainName(String name) {
+        return this.name.contains(name);
     }
 }
