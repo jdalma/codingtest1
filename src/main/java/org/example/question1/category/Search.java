@@ -1,9 +1,8 @@
-package org.example.question1;
+package org.example.question1.category;
 
 import java.util.List;
 
-public interface Category<T> {
+public interface Search<T> {
     T searchById(int id);
     List<T> searchByName(String name);
-    void addLast(T element);
 }

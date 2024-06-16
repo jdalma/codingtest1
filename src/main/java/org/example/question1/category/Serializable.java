@@ -1,4 +1,4 @@
-package org.example.question1;
+package org.example.question1.category;
 
 public interface Serializable {
     String convert();

@@ -1,47 +1,27 @@
 package org.example.question1;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class Board implements Category<Board>, Serializable {
+public class Board {
+    private final int id;
+    private final List<Post> posts;
 
-    private static final ObjectMapper MAPPER = new ObjectMapper();
-    private final Board parent;
-    private final String name;
-    private final BoardIdentifier id;
-    private final List<Board> children;
-
-    private Board(Board parent, String name, BoardIdentifier boardIdentifier, List<Board> children) {
-        this.parent = parent;
-        this.name = name;
-        this.id = boardIdentifier;
-        this.children = children;
+    public Board(int id, List<Post> posts) {
+        this.id = id;
+        this.posts = posts;
     }
 
-    public Board(Board parent, String name, int id) {
-        this(parent, name, new BoardIdentifier(id), new ArrayList<>());
+    public Board(int id) {
+        this(id, new ArrayList<>());
     }
 
-    @Override
-    public Board searchById(int id) {
-
-        return null;
+    public void addPost(Post post) {
+        this.posts.add(post);
     }
 
-    @Override
-    public List<Board> searchByName(String name) {
-        return null;
-    }
-
-    @Override
-    public void addLast(Board element) {
-        this.children.add(element);
-    }
-
-    @Override
-    public String convert() {
-        return null;
+    public boolean isSameId(int id) {
+        return this.id == id;
     }
 }

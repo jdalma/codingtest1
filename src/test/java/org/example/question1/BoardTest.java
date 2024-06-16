@@ -1,41 +1,51 @@
 package org.example.question1;
 
+import org.example.question1.category.Category;
+import org.example.question1.category.CategoryBuilder;
+import org.example.question1.category.Search;
 import org.junit.jupiter.api.Test;
 
-import static org.example.question1.BoardBuilder.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.example.question1.category.CategoryBuilder.*;
 
 class BoardTest {
 
-    private final Category<Board> root = makeFixture();
+    private final Search<Category> root = makeFixture();
 
     @Test
     void searchById() {
         System.out.println(root);
     }
 
-    private Board makeFixture() {
-        final BoardElement 익명게시판 = BoardElement.of(8, "익명게시판");
+    private Category makeFixture() {
+        final List<Post> posts = new ArrayList<>();
+        posts.add(new Post(1, "1번 게시글", "1번 게시글"));
 
-        final BoardElement 엑소 = BoardElement.of(2, "엑소")
-                .add(BoardElement.of(3, "공지사항"))
-                .add(BoardElement.of(4, "첸"))
-                .add(BoardElement.of(5, "백현"));
-        final BoardElement 방탄소년단 = BoardElement.of(6, "방탄소년단")
-                .add(BoardElement.of(7, "공지사항"))
-                .add(익명게시판)
-                .add(BoardElement.of(9, "뷔"));
-        final BoardElement 남자 = BoardElement.of(1, "남자")
+        final Board 익명게시판 = new Board(8, posts);
+
+        final CategoryElement 엑소 = CategoryElement.of("엑소", 2)
+                .add(CategoryElement.of("공지사항", 3))
+                .add(CategoryElement.of("첸", 4))
+                .add(CategoryElement.of("백현", 5));
+        final CategoryElement 방탄소년단 = CategoryElement.of("방탄소년단", 6)
+                .add(CategoryElement.of("공지사항", 7))
+                .add(CategoryElement.of("익명게시판", 익명게시판))
+                .add(CategoryElement.of("뷔", 9));
+        final CategoryElement 남자 = CategoryElement.of("남자", 1)
                 .add(엑소)
                 .add(방탄소년단);
 
-        final BoardElement 블랙핑크 = BoardElement.of(11, "블랙핑크")
-                .add(BoardElement.of(12, "공지사항"))
-                .add(익명게시판)
-                .add(BoardElement.of(13, "로제"));
-        final BoardElement 여자 = BoardElement.of(10, "여자")
+        final CategoryElement 블랙핑크 = CategoryElement.of("블랙핑크", 11)
+                .add(CategoryElement.of("공지사항", 12))
+                .add(CategoryElement.of("익명게시판", 익명게시판))
+                .add(CategoryElement.of("로제", 13));
+        final CategoryElement 여자 = CategoryElement.of("여자", 10)
                 .add(블랙핑크);
 
-        return new BoardBuilder()
+        return new CategoryBuilder()
                 .add(남자)
                 .add(여자)
                 .build();
