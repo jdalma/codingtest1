@@ -30,18 +30,6 @@ class CategoryTest {
     }
 
     @Test
-    @DisplayName("익명게시판은 서로 다른 Category이지만, 동일한 Board이다.")
-    void reference() {
-        List<Category> categories = root.searchById(8);
-
-        assertThat(categories.size()).isEqualTo(2);
-        assertThat(categories.get(0)).isNotEqualTo(categories.get(1));
-        assertThat(categories.get(0).getBoard()).isEqualTo(categories.get(1).getBoard());
-        assertThat(categories.get(0).getName()).isEqualTo("익명게시판");
-        assertThat(categories.get(1).getName()).isEqualTo("익명게시판");
-    }
-
-    @Test
     @DisplayName("searchByName 메서드는 검색 단어를 포함한 이름을 가진 Cateoory들을 반환한다.")
     void searchByName() {
         List<Category> categories = root.searchByName("자");
@@ -49,6 +37,33 @@ class CategoryTest {
         assertThat(categories.size()).isEqualTo(2);
         assertThat(categories.get(0).getName()).isEqualTo("남자");
         assertThat(categories.get(1).getName()).isEqualTo("여자");
+    }
+
+    @Test
+    @DisplayName("Category는 자기참조관계이며, 관계 데이터를 얻을 수 있다.")
+    void reference() {
+        List<Category> categories = root.searchByName("남자");
+        assertThat(categories.size()).isEqualTo(1);
+
+        List<Category> 남자_그룹 = categories.get(0).getChildren();
+        assertThat(남자_그룹.size()).isEqualTo(2);
+
+        Category 엑소 = 남자_그룹.get(0);
+        Category 방탄소년단 = 남자_그룹.get(1);
+        assertThat(엑소.getChildren().size()).isEqualTo(3);
+        assertThat(방탄소년단.getChildren().size()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("익명게시판은 서로 다른 Category이지만, 동일한 Board이다.")
+    void sameBoard() {
+        List<Category> categories = root.searchById(8);
+
+        assertThat(categories.size()).isEqualTo(2);
+        assertThat(categories.get(0)).isNotEqualTo(categories.get(1));
+        assertThat(categories.get(0).getBoard()).isEqualTo(categories.get(1).getBoard());
+        assertThat(categories.get(0).getName()).isEqualTo("익명게시판");
+        assertThat(categories.get(1).getName()).isEqualTo("익명게시판");
     }
 
     @Test
